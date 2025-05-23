@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import "./Form.css";
 
 const Form = () => {
     const [nome, setNome] = useState('');
@@ -17,9 +18,18 @@ const Form = () => {
         }
     };
 
+    //Qualquer mudança
+    // useEffect(() => {
+    //     console.log('Estado Mudou!')
+    // });
+
+    useEffect(() => {
+        console.log("Mudou Nome")
+    }, [nome]);
+
     return (
         <>
-            <form>
+            <form className="formulario">
                 <label htmlFor="nome">Seu Nome</label>
                 <input id="nome" type="text" placeholder="Seu Nome" onChange={e => setNome(e.target.value)} />
                 <label htmlFor="front">Nota Front-End</label>
@@ -32,6 +42,6 @@ const Form = () => {
             <p>Olá {nome}, você foi {resultado()}.</p>
         </>
     )
-}
+};
 
 export default Form;
