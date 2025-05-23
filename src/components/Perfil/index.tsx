@@ -1,15 +1,14 @@
 import "./Perfil.css";
+interface propsPerfil {
+    nome: string,
+    avatar: string
+}
 
-const Perfil = () => {
-    const user = {
-        nome: "Guilherme Rosa",
-        avatar: "https://github.com/guilhermers23.png"
-    };
-
+const Perfil = ({ nome, avatar }: propsPerfil) => {
     return (
         <div>
-            <img className="perfil-avatar" src={user.avatar} alt={`Foto de ${user.nome}`} />
-            <h3 className="perfil-titulo">{user.nome}</h3>
+            <img className="perfil-avatar" src={avatar} alt={`Foto de ${nome}`} />
+            <h3 className="perfil-titulo">{nome}</h3>
         </div>
     )
 };
