@@ -1,26 +1,35 @@
 import { useEffect, useState } from "react";
+import styles from "./ReposLis.module.css";
 
 interface DadosAPI {
     id: string,
     name: string,
-    description: string,
     language: string,
     html_url: string,
 }
 
-const ReposList = () => {
+const ReposList = ({ username }: { username: string }) => {
     const [repos, setRepos] = useState<DadosAPI[]>([]);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        fetch("https://api.github.com/users/guilhermers23/repos")
-            .then(res => res.json())
-            .then(response => (
-                setLoading(false),
-                setRepos(response)));
-    }, []);
+        const fetchData = async () => {
+            try {
+                const res = await fetch(`https://api.github.com/users/${username}/repos`);
+                const response = await res.json();
+                setRepos(response);
+            } catch (error) {
+                // Lidar com erros, por exemplo, exibir uma mensagem para o usuário
+                console.error("Erro ao buscar repositórios:", error);
+            } finally {
+                setLoading(false); // Certifique-se de que o loading é sempre definido como false
+            }
+        };
+        fetchData();
+    }, [username]);
+
     return (
-        <>
+        <div className="container">
             <h3>Repositorios</h3>
             {loading &&
                 <div className="d-flex justify-content-center">
@@ -29,18 +38,22 @@ const ReposList = () => {
                     </div>
                 </div>
             }
-            <div className="list-group">
-                {repos.map(item => (
-                    <a href={item.html_url} target="_blank" className="list-group-item list-group-item-action" aria-current="true">
-                        <div className="d-flex w-100 justify-content-between">
-                            <h5 className="mb-1">Nome: {item.name}</h5>
-                            <small>{item.language}</small>
+            <ul className={styles.list}>
+                {repos.map(({ id, name, language, html_url }) => (
+                    <li className={styles.listItem} key={id}>
+                        <div className={styles.itemName}>
+                            <b>Nome:</b>
+                            {name}
                         </div>
-                        <p className="mb-1">{item.description}</p>
-                    </a>
+                        <div className={styles.itemLanguage}>
+                            <b>Linguagem:</b>
+                            {language}
+                        </div>
+                        <a className={styles.itemLink} target="_blank" href={html_url}>Visitar no Github</a>
+                    </li>
                 ))}
-            </div>
-        </>
+            </ul>
+        </div>
     )
 }
 
