@@ -1,0 +1,53 @@
+.list {
+    color: black;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 2rem;
+    padding: 2rem;
+}
+
+.listItem {
+    list-style: none;
+    padding: 16px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.listItem {
+    list-style: none;
+    padding: 1rem;
+    border: 1px solid rgba(0, 0, 0, .3);
+    border-radius: .5rem;
+    box-shadow: 12px 12px 2px 1px rgba(0, 0, 255, .2);
+    background-color: #fff;
+    transition: all .5s;
+}
+
+.listItem:hover {
+    transform: scale(1.05);
+}
+
+.itemName b,
+.itemLanguage b {
+    margin-right: .5rem;
+}
+
+.itemLink {
+    display: block;
+    color: #fff;
+    background-color: #747bff;
+    text-align: center;
+    font-weight: bold;
+    margin-top: .5rem;
+    padding: .5rem;
+    text-decoration: none;
+    transition: background-color .3s;
+}
+
+.itemLink:hover {
+    background-color: #5c64f1;
+}
+
+.reposContainer {
+    display: flex;
+    justify-content: center;
+}

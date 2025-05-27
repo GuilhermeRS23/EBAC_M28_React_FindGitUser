@@ -1,0 +1,10 @@
+.input {
+    padding: .6em 1.2em;
+    border-radius: 10px;
+    width: 50%;
+}
+
+.containerBusca {
+    display: flex;
+    justify-content: center;
+}
